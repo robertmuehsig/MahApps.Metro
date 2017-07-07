@@ -19,8 +19,6 @@ namespace MahApps.Metro
 
         private static string GetCurrentAssemblyName()
         {
-            System.IO.File.WriteAllText(@"D:\test.txt", typeof(ThemeManager).Assembly.GetName().Name);
-
             return typeof(ThemeManager).Assembly.GetName().Name;
         }
 
