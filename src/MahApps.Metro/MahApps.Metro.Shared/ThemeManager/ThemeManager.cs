@@ -17,6 +17,13 @@ namespace MahApps.Metro
         private static IList<Accent> _accents;
         private static IList<AppTheme> _appThemes;
 
+        private static string GetCurrentAssemblyName()
+        {
+            System.IO.File.WriteAllText(@"D:\test.txt", typeof(ThemeManager).Assembly.GetName().Name);
+
+            return typeof(ThemeManager).Assembly.GetName().Name;
+        }
+
         /// <summary>
         /// Gets a list of all of default accents.
         /// </summary>
@@ -38,7 +45,7 @@ namespace MahApps.Metro
                 {
                     foreach (var color in colors)
                     {
-                        var resourceAddress = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Accents/{color}.xaml");
+                        var resourceAddress = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Styles/Accents/{color}.xaml");
                         _accents.Add(new Accent(color, resourceAddress));
                     }
                 }
@@ -69,7 +76,7 @@ namespace MahApps.Metro
                 {
                     foreach (var color in themes)
                     {
-                        var resourceAddress = new Uri($"pack://application:,,,/MahApps.Metro;component/Styles/Accents/{color}.xaml");
+                        var resourceAddress = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Styles/Accents/{color}.xaml");
                         _appThemes.Add(new AppTheme(color, resourceAddress));
                     }
                 }

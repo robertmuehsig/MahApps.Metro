@@ -110,6 +110,11 @@ namespace MahApps.Metro.Controls.Dialogs
             return settings;
         }
 
+        private static string GetCurrentAssemblyName()
+        {
+            return typeof(ThemeManager).Assembly.GetName().Name;
+        }
+
         private void Initialize([CanBeNull] MetroWindow owningWindow, [CanBeNull] MetroDialogSettings settings)
         {
             this.OwningWindow = owningWindow;
@@ -117,12 +122,12 @@ namespace MahApps.Metro.Controls.Dialogs
 
             if (this.DialogSettings != null && !this.DialogSettings.SuppressDefaultResources)
             {
-                this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
+                this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Styles/Controls.xaml") });
             }
 
-            this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
-            this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml") });
-            this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Themes/Dialogs/BaseMetroDialog.xaml") });
+            this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Styles/Fonts.xaml") });
+            this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Styles/Colors.xaml") });
+            this.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Themes/Dialogs/BaseMetroDialog.xaml") });
             if (this.DialogSettings?.CustomResourceDictionary != null)
             {
                 this.Resources.MergedDictionaries.Add(this.DialogSettings.CustomResourceDictionary);

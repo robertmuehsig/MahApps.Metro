@@ -547,15 +547,20 @@ namespace MahApps.Metro.Controls.Dialogs
             };
         }
 
+        private static string GetCurrentAssemblyName()
+        {
+            return typeof(ThemeManager).Assembly.GetName().Name;
+        }
+
         private static Window SetupExternalDialogWindow(BaseMetroDialog dialog)
         {
             var win = CreateExternalWindow();
 
             try
             {
-                win.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml") });
-                win.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml") });
-                win.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml") });
+                win.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Styles/Controls.xaml") });
+                win.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Styles/Fonts.xaml") });
+                win.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"pack://application:,,,/{GetCurrentAssemblyName()};component/Styles/Colors.xaml") });
                 win.SetResourceReference(MetroWindow.GlowBrushProperty, "AccentColorBrush");
             }
             catch (Exception) { }
